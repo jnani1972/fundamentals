@@ -1,0 +1,354 @@
+[
+  {
+    "company_name": "Hindustan Aeronautics Limited",
+    "nse_symbol": "HAL",
+    "bse_code": "541154",
+    "isin": "INE066F01020",
+    "sector": "Aerospace & Defence",
+    "industry": "Aerospace & Defence",
+    "official_x_handle": "@HALHQBLR",
+    "official_website": "https://hal-india.co.in",
+    "investor_relations_url": "https://hal-india.co.in/investor",
+    "aliases": [
+      "HAL",
+      "Hindustan Aeronautics",
+      "Hindustan Aeronautics Ltd"
+    ],
+    "source_verified": true,
+    "last_verified_at": "2026-09-01",
+    "defence_aerospace_related": true
+  },
+  {
+    "company_name": "Bharat Electronics Limited",
+    "nse_symbol": "BEL",
+    "bse_code": "500049",
+    "isin": "INE263A01024",
+    "sector": "Aerospace & Defence",
+    "industry": "Electronics - Components",
+    "official_x_handle": "@BEL_CorpCom",
+    "official_website": "https://bel-india.in",
+    "investor_relations_url": "https://bel-india.in/investors/",
+    "aliases": [
+      "BEL",
+      "Bharat Electronics",
+      "Bharat Electronics Ltd"
+    ],
+    "source_verified": true,
+    "last_verified_at": "2026-09-01",
+    "defence_aerospace_related": true
+  },
+  {
+    "company_name": "Bharat Dynamics Limited",
+    "nse_symbol": "BDL",
+    "bse_code": "541143",
+    "isin": "INE171Z01026",
+    "sector": "Aerospace & Defence",
+    "industry": "Aerospace & Defence",
+    "official_x_handle": "@bharat_dynamics",
+    "official_website": "https://bdl-india.in",
+    "investor_relations_url": "https://bdl-india.in/stock-exchange-disclosures",
+    "aliases": [
+      "BDL",
+      "Bharat Dynamics",
+      "Bharat Dynamics Ltd"
+    ],
+    "source_verified": true,
+    "last_verified_at": "2026-09-01",
+    "defence_aerospace_related": true
+  },
+  {
+    "company_name": "BEML Limited",
+    "nse_symbol": "BEML",
+    "bse_code": "500048",
+    "isin": "INE258A01024",
+    "sector": "Engineering - Industrial Equipments",
+    "industry": "Engineering - Industrial Equipments",
+    "official_x_handle": null,
+    "official_website": "https://www.bemlindia.in",
+    "investor_relations_url": "https://www.bemlindia.in/investors/",
+    "aliases": [
+      "BEML",
+      "BEML Ltd",
+      "Bharat Earth Movers",
+      "Bharat Earth Movers Limited"
+    ],
+    "source_verified": true,
+    "last_verified_at": "2026-09-01",
+    "defence_aerospace_related": true
+  },
+  {
+    "company_name": "Mazagon Dock Shipbuilders Limited",
+    "nse_symbol": "MAZDOCK",
+    "bse_code": "543237",
+    "isin": "INE249Z01020",
+    "sector": "Ship Building",
+    "industry": "Ship Building",
+    "official_x_handle": null,
+    "official_website": "https://mazagondock.in",
+    "investor_relations_url": "https://www.mazagondock.in/English/investor",
+    "aliases": [
+      "MDL",
+      "Mazagon Dock",
+      "Mazagon Dock Shipbuilders",
+      "Mazagon Dock Shipbuilders Ltd"
+    ],
+    "source_verified": true,
+    "last_verified_at": "2026-09-01",
+    "defence_aerospace_related": true
+  },
+  {
+    "company_name": "Garden Reach Shipbuilders & Engineers Limited",
+    "nse_symbol": "GRSE",
+    "bse_code": "542011",
+    "isin": "INE382Z01011",
+    "sector": "Ship Building",
+    "industry": "Ship Building",
+    "official_x_handle": null,
+    "official_website": "https://www.grse.in",
+    "investor_relations_url": "https://www.grse.in/investor-presentations/",
+    "aliases": [
+      "GRSE",
+      "Garden Reach Shipbuilders",
+      "Garden Reach Shipbuilders and Engineers",
+      "Garden Reach Shipbuilders & Engineers"
+    ],
+    "source_verified": true,
+    "last_verified_at": "2026-09-01",
+    "defence_aerospace_related": true
+  },
+  {
+    "company_name": "Cochin Shipyard Limited",
+    "nse_symbol": "COCHINSHIP",
+    "bse_code": "540678",
+    "isin": "INE704P01025",
+    "sector": "Ship Building",
+    "industry": "Ship Building",
+    "official_x_handle": "@cslcochin",
+    "official_website": "https://cochinshipyard.in",
+    "investor_relations_url": "https://cochinshipyard.in/Investor",
+    "aliases": [
+      "CSL",
+      "Cochin Shipyard",
+      "Cochin Shipyard Ltd"
+    ],
+    "source_verified": true,
+    "last_verified_at": "2026-09-01",
+    "defence_aerospace_related": true
+  },
+  {
+    "company_name": "Data Patterns (India) Limited",
+    "nse_symbol": "DATAPATTNS",
+    "bse_code": "543428",
+    "isin": "INE0IX101010",
+    "sector": "Aerospace & Defence",
+    "industry": "Aerospace & Defence",
+    "official_x_handle": null,
+    "official_website": "https://www.datapatternsindia.com",
+    "investor_relations_url": "https://www.datapatternsindia.com/investors/investors.php",
+    "aliases": [
+      "Data Patterns",
+      "Data Patterns India",
+      "Data Patterns (India)",
+      "Data Patterns (India) Ltd"
+    ],
+    "source_verified": true,
+    "last_verified_at": "2026-09-01",
+    "defence_aerospace_related": true
+  },
+  {
+    "company_name": "Paras Defence and Space Technologies Limited",
+    "nse_symbol": "PARAS",
+    "bse_code": "543367",
+    "isin": "INE045601023",
+    "sector": "Aerospace & Defence",
+    "industry": "Defence",
+    "official_x_handle": null,
+    "official_website": "https://parasdefence.com",
+    "investor_relations_url": "https://parasdefence.com/investors",
+    "aliases": [
+      "Paras Defence",
+      "Paras Defence & Space Technologies",
+      "Paras Defence and Space Technologies",
+      "Paras Defence and Space Technologies Ltd"
+    ],
+    "source_verified": true,
+    "last_verified_at": "2026-09-01",
+    "defence_aerospace_related": true
+  },
+  {
+    "company_name": "Zen Technologies Limited",
+    "nse_symbol": "ZENTEC",
+    "bse_code": "533339",
+    "isin": "INE251B01027",
+    "sector": "Aerospace & Defence",
+    "industry": "Defence",
+    "official_x_handle": null,
+    "official_website": "https://www.zentechnologies.com",
+    "investor_relations_url": "https://www.zentechnologies.com/investors",
+    "aliases": [
+      "Zen Technologies",
+      "Zen Technologies Ltd",
+      "ZENTEC"
+    ],
+    "source_verified": true,
+    "last_verified_at": "2026-09-01",
+    "defence_aerospace_related": true
+  },
+  {
+    "company_name": "Astra Microwave Products Limited",
+    "nse_symbol": "ASTRAMICRO",
+    "bse_code": "532493",
+    "isin": "INE386C01029",
+    "sector": "Aerospace & Defence",
+    "industry": "Defence",
+    "official_x_handle": null,
+    "official_website": "https://astramwp.com",
+    "investor_relations_url": "https://astramwp.com/stock-codes/",
+    "aliases": [
+      "Astra Microwave",
+      "Astra Microwave Products",
+      "Astra Microwave Products Ltd"
+    ],
+    "source_verified": true,
+    "last_verified_at": "2026-09-01",
+    "defence_aerospace_related": true
+  },
+  {
+    "company_name": "DCX Systems Limited",
+    "nse_symbol": "DCXINDIA",
+    "bse_code": "543650",
+    "isin": "INE0KL801015",
+    "sector": "Aerospace & Defence",
+    "industry": "Aerospace & Defence",
+    "official_x_handle": null,
+    "official_website": "https://www.dcxindia.com",
+    "investor_relations_url": null,
+    "aliases": [
+      "DCX",
+      "DCX Systems",
+      "DCX Systems Ltd",
+      "DCX India"
+    ],
+    "source_verified": true,
+    "last_verified_at": "2026-09-01",
+    "defence_aerospace_related": true
+  },
+  {
+    "company_name": "Apollo Micro Systems Limited",
+    "nse_symbol": "APOLLO",
+    "bse_code": "540879",
+    "isin": "INE713T01028",
+    "sector": "Aerospace & Defence",
+    "industry": "Aerospace & Defence",
+    "official_x_handle": null,
+    "official_website": "https://apollo-micro.com",
+    "investor_relations_url": "https://www.apollo-micro.com/investor-relations.html",
+    "aliases": [
+      "Apollo Micro",
+      "Apollo Micro Systems",
+      "Apollo Micro Systems Ltd",
+      "Apollo Microsystems"
+    ],
+    "source_verified": true,
+    "last_verified_at": "2026-09-01",
+    "defence_aerospace_related": true
+  },
+  {
+    "company_name": "ideaForge Technology Limited",
+    "nse_symbol": "IDEAFORGE",
+    "bse_code": "543932",
+    "isin": "INE349Y01013",
+    "sector": "Aerospace & Defence",
+    "industry": "Aerospace & Defence",
+    "official_x_handle": null,
+    "official_website": "https://ideaforgetech.com",
+    "investor_relations_url": "https://ideaforgetech.com/investor",
+    "aliases": [
+      "ideaForge",
+      "Ideaforge",
+      "ideaForge Technology",
+      "ideaForge Technology Ltd"
+    ],
+    "source_verified": true,
+    "last_verified_at": "2026-09-01",
+    "defence_aerospace_related": true
+  },
+  {
+    "company_name": "MTAR Technologies Limited",
+    "nse_symbol": "MTARTECH",
+    "bse_code": "543270",
+    "isin": "INE864I01014",
+    "sector": "Aerospace & Defence",
+    "industry": "Aerospace & Defence",
+    "official_x_handle": null,
+    "official_website": "https://mtar.in",
+    "investor_relations_url": "https://mtar.in/investors-information/",
+    "aliases": [
+      "MTAR",
+      "MTAR Technologies",
+      "MTAR Technologies Ltd"
+    ],
+    "source_verified": true,
+    "last_verified_at": "2026-09-01",
+    "defence_aerospace_related": true
+  },
+  {
+    "company_name": "Mishra Dhatu Nigam Limited",
+    "nse_symbol": "MIDHANI",
+    "bse_code": "541195",
+    "isin": "INE099Z01011",
+    "sector": "Iron & Steel",
+    "industry": "Iron & Steel",
+    "official_x_handle": "@midhaniltd",
+    "official_website": "https://midhani-india.in",
+    "investor_relations_url": null,
+    "aliases": [
+      "MIDHANI",
+      "Mishra Dhatu Nigam",
+      "Mishra Dhatu Nigam Ltd",
+      "Midhani"
+    ],
+    "source_verified": true,
+    "last_verified_at": "2026-09-01",
+    "defence_aerospace_related": true
+  },
+  {
+    "company_name": "Cyient DLM Limited",
+    "nse_symbol": "CYIENTDLM",
+    "bse_code": "543933",
+    "isin": "INE055S01018",
+    "sector": "Capital Goods",
+    "industry": "Electric Equipment",
+    "official_x_handle": null,
+    "official_website": "https://www.cyientdlm.com",
+    "investor_relations_url": "https://www.cyientdlm.com/investors/statutory-filings",
+    "aliases": [
+      "Cyient DLM",
+      "Cyient DLM Ltd"
+    ],
+    "source_verified": true,
+    "last_verified_at": "2026-09-01",
+    "defence_aerospace_related": true
+  },
+  {
+    "company_name": "Larsen & Toubro Limited",
+    "nse_symbol": "LT",
+    "bse_code": "500510",
+    "isin": "INE018A01030",
+    "sector": "Engineering & Construction",
+    "industry": "Infrastructure - General",
+    "official_x_handle": "@larsentoubro",
+    "official_website": "https://www.larsentoubro.com",
+    "investor_relations_url": "https://investors.larsentoubro.com/",
+    "aliases": [
+      "L&T",
+      "L and T",
+      "Larsen and Toubro",
+      "Larsen & Toubro",
+      "Larsen & Toubro Ltd"
+    ],
+    "source_verified": true,
+    "last_verified_at": "2026-09-01",
+    "defence_aerospace_related": true
+  }
+]
