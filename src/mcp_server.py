@@ -241,7 +241,9 @@ def _port_in_use(host: str, port: int) -> bool:
 def main() -> None:
     host = LISTEN_HOST
     port = listen_port()
-    if _port_in_use("127.0.0.1", port):
+    # Skip the local occupancy check in production; Railway assigns PORT and
+    # a false positive here would exit before uvicorn could bind.
+    if os.environ.get("PORT") is None and _port_in_use("127.0.0.1", port):
         raise SystemExit(
             f"Port {port} is already in use. "
             "Stop the other process, then start again with:\n"

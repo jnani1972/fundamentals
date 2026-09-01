@@ -1,0 +1,7 @@
+[build]
+builder = "RAILPACK"
+
+[deploy]
+startCommand = "python src/mcp_server.py"
+healthcheckPath = "/health"
+healthcheckTimeout = 30

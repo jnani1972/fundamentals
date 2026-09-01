@@ -100,7 +100,7 @@ PORT=8080 python3 src/mcp_server.py
 ### Railway deployment
 
 1. Create a new Railway project from this repo (GitHub, or `railway up`).
-2. Railway installs `requirements.txt` and starts the web process from `Procfile`.
+2. Railway installs `requirements.txt` and starts the web process from `Procfile` / `railway.toml`.
 3. Generate a public domain in Railway (Settings → Networking).
 
 Start command (also in `Procfile`):
