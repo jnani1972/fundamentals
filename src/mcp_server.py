@@ -58,6 +58,7 @@ _UI_HTML = """<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
   <title>Indian company registry — search</title>
   <style>
     body { font: 16px/1.45 ui-sans-serif, system-ui, sans-serif; margin: 2rem; color: #1a1a1a; max-width: 60rem; }
@@ -330,6 +331,7 @@ def _status_html(request: Request) -> HTMLResponse:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
   <title>Indian company registry</title>
   <style>
     body {{ font: 16px/1.45 ui-sans-serif, system-ui, sans-serif; margin: 2rem; color: #1a1a1a; max-width: 42rem; }}
@@ -377,6 +379,17 @@ async def root(request: Request) -> Response:
 async def web_ui(_request: Request) -> Response:
     """Browser search UI over the registry tools."""
     return HTMLResponse(_UI_HTML)
+
+
+FAVICON_SVG = (
+    "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>"
+    "<text y='.9em' font-size='90'>📈</text></svg>"
+)
+
+
+@mcp.custom_route("/favicon.ico", methods=["GET"])
+async def favicon(_request: Request) -> Response:
+    return Response(FAVICON_SVG, media_type="image/svg+xml")
 
 
 def create_http_app():

@@ -168,7 +168,12 @@ def test_web_ui_serves_search_page():
         assert page.status_code == 200
         assert "text/html" in page.headers["content-type"]
         assert "search-form" in page.text
+        assert "rel=\"icon\"" in page.text
         assert "{ {" not in page.text  # template braces must not leak into HTML
+
+        favicon = client.get("/favicon.ico")
+        assert favicon.status_code == 200
+        assert "image/svg+xml" in favicon.headers["content-type"]
 
 
 def test_listen_port_uses_railway_port_or_local_fallback(monkeypatch):
