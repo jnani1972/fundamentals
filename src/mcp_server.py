@@ -122,7 +122,11 @@ function renderCard(obj) {
   const title = obj.company_name || obj.nse_symbol || 'Result';
   let rows = '';
   for (const [k, v] of Object.entries(obj)) {
-    if (v === null || v === undefined) continue;
+    if (v === null || v === undefined) {
+      if (k === 'official_x_handle')
+        rows += '<tr><td class="k">official_x_handle</td><td class="muted">no verified account</td></tr>';
+      continue;
+    }
     const shown = Array.isArray(v) ? v.join(', ') : (typeof v === 'object' ? JSON.stringify(v) : v);
     rows += '<tr><td class="k">' + esc(k) + '</td><td>' + linkify(shown) + '</td></tr>';
   }
@@ -135,13 +139,8 @@ function render(data) {
   } else if (Array.isArray(data)) {
     resultsEl.innerHTML = data.length ? data.map(renderCard).join('') : '<p>No match.</p>';
   } else if (typeof data === 'object' && Array.isArray(data.companies)) {
-    let html = data.companies.map(renderCard).join('');
-    const without = data.companies_without_verified_official_x_account || [];
-    if (without.length) {
-      html += '<div class="card"><h2>No verified official X account</h2><p>' +
-        without.map(r => esc(r.company_name)).join(', ') + '</p></div>';
-    }
-    resultsEl.innerHTML = html;
+    // Every company gets a full card; missing handles are noted inside the card.
+    resultsEl.innerHTML = data.companies.map(renderCard).join('');
   } else if (typeof data === 'object') {
     resultsEl.innerHTML = renderCard(data);
   } else {
