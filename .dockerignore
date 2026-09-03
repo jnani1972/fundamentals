@@ -1,0 +1,7 @@
+.venv/
+.git/
+.gitignore
+tests/
+__pycache__/
+*.pyc
+.cursor/

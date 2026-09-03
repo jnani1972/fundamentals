@@ -116,6 +116,22 @@ After deploy:
 
 Set Railway’s health check path to `/health` if you want deploy probes against that endpoint.
 
+### Docker
+
+Build and run locally:
+
+```bash
+docker build -t indian-market-intelligence .
+docker run --rm -p 3001:3001 indian-market-intelligence
+```
+
+That listens on:
+
+- Health: `http://127.0.0.1:3001/health`
+- MCP: `http://127.0.0.1:3001/mcp`
+
+The image is self-contained: `data/companies.json` is baked in, the server runs as a non-root user, and `PORT` can be overridden with `-e PORT=<port>` (the container still maps it, e.g. `-e PORT=8080 -p 8080:8080`).
+
 ### Environment variables
 
 | Variable | Required | Meaning |
