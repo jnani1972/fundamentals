@@ -33,11 +33,16 @@ async def test_mcp_tools_are_read_only_lookups():
         assert tools >= {
             "get_company_by_symbol",
             "search_companies",
+            "get_sectors",
             "get_companies_by_sector",
             "get_official_x_handle",
             "get_official_x_handles_by_sector",
             "get_defence_research_universe",
         }
+
+        sectors = _payload(await client.call_tool("get_sectors", {}))
+        assert "Aerospace & Defence" in sectors
+        assert sectors == sorted(sectors)
 
         company = _payload(
             await client.call_tool("get_company_by_symbol", {"symbol": "hal"})

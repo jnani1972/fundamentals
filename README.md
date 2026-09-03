@@ -147,6 +147,7 @@ Tools:
 | --- | --- | --- |
 | `get_company_by_symbol` | `symbol` | Canonical company object, or `null` |
 | `search_companies` | `query` | Matching company objects |
+| `get_sectors` | none | Sorted list of distinct sector labels |
 | `get_companies_by_sector` | `sector` | Matching company objects |
 | `get_official_x_handle` | `symbol` | Verified X handle, or `null` |
 | `get_official_x_handles_by_sector` | `sector` | `{company_name, nse_symbol, official_x_handle}` for companies with a verified handle |

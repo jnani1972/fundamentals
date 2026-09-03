@@ -36,6 +36,7 @@ from company_registry import (  # noqa: E402
     get_defence_research_universe as registry_get_defence_research_universe,
     get_official_x_handle as registry_get_official_x_handle,
     get_official_x_handles_by_sector as registry_get_official_x_handles_by_sector,
+    get_sectors as registry_get_sectors,
     search_companies as registry_search_companies,
 )
 
@@ -45,6 +46,7 @@ MCP_PATH = "/mcp"
 TOOL_NAMES = [
     "get_company_by_symbol",
     "search_companies",
+    "get_sectors",
     "get_companies_by_sector",
     "get_official_x_handle",
     "get_official_x_handles_by_sector",
@@ -81,7 +83,10 @@ _UI_HTML = """<!doctype html>
   <form id="search-form">
     <input id="q" type="search" placeholder="Search companies…" autofocus>
     <button type="submit">Search</button>
-    <button type="button" class="ghost" id="universe-btn">Defence universe</button>
+    <select id="sector-sel" title="Browse by sector">
+      <option value="" selected disabled>Choose a sector…</option>
+      <option value="__defence__">Defence / aerospace universe</option>
+    </select>
   </form>
   <div id="status"></div>
   <div id="results"></div>
@@ -160,6 +165,17 @@ async function run(label, promise) {
   }
 }
 
+async function loadSectors() {
+  const sectors = await callTool('get_sectors', {});
+  const sel = document.getElementById('sector-sel');
+  for (const s of sectors) {
+    const opt = document.createElement('option');
+    opt.value = s;
+    opt.textContent = s;
+    sel.appendChild(opt);
+  }
+}
+
 document.getElementById('search-form').addEventListener('submit', (e) => {
   e.preventDefault();
   const q = document.getElementById('q').value.trim();
@@ -167,10 +183,17 @@ document.getElementById('search-form').addEventListener('submit', (e) => {
   run('“' + q + '”', callTool('search_companies', {query: q}));
 });
 
-document.getElementById('universe-btn').addEventListener('click', () =>
-  run('defence universe', callTool('get_defence_research_universe', {})));
+document.getElementById('sector-sel').addEventListener('change', (e) => {
+  const v = e.target.value;
+  if (!v) return;
+  if (v === '__defence__')
+    run('defence universe', callTool('get_defence_research_universe', {}));
+  else
+    run(v, callTool('get_companies_by_sector', {sector: v}));
+});
 
-// Load a default result so the page is never empty.
+// Populate the sector dropdown from the registry, then load the default view.
+loadSectors().catch((err) => { statusEl.textContent = 'Could not load sectors: ' + err.message; });
 run('defence universe', callTool('get_defence_research_universe', {}));
 </script>
 </body>
@@ -212,6 +235,12 @@ def get_company_by_symbol(symbol: str) -> dict | None:
 def search_companies(query: str) -> list[dict]:
     """Return companies matching a case-insensitive name, symbol, code, or alias query."""
     return registry_search_companies(query)
+
+
+@mcp.tool()
+def get_sectors() -> list[str]:
+    """Return the sorted list of distinct sectors in the registry."""
+    return registry_get_sectors()
 
 
 @mcp.tool()

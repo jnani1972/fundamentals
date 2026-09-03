@@ -100,6 +100,13 @@ def get_companies_by_sector(sector: str) -> list[Company]:
     ]
 
 
+def get_sectors() -> list[str]:
+    """Return the sorted list of distinct sector labels in the registry."""
+    return sorted(
+        {company["sector"] for company in load_companies() if company.get("sector")}
+    )
+
+
 def get_official_x_handle(symbol: str) -> str | None:
     """Return the official X handle for an NSE symbol, if known."""
     company = get_company_by_symbol(symbol)

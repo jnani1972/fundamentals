@@ -12,6 +12,7 @@ from company_registry import (  # noqa: E402
     get_defence_research_universe,
     get_official_x_handle,
     get_official_x_handles_by_sector,
+    get_sectors,
     load_companies,
     search_companies,
 )
@@ -93,6 +94,13 @@ def test_search_companies_matches_name_symbol_and_alias():
     assert [company["nse_symbol"] for company in by_symbol] == ["MAZDOCK"]
     assert [company["nse_symbol"] for company in by_alias] == ["COCHINSHIP"]
     assert search_companies("") == []
+
+
+def test_get_sectors_returns_sorted_distinct_labels():
+    sectors = get_sectors()
+    assert sectors == sorted(set(sectors))
+    assert "Aerospace & Defence" in sectors
+    assert "Ship Building" in sectors
 
 
 def test_get_companies_by_sector_is_case_insensitive():
