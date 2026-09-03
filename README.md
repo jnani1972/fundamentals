@@ -31,7 +31,13 @@ This slice is a canonical company registry plus a read-only MCP server over Stre
 
 Unknown values are stored as `null`. Do not invent identifiers, websites, or social handles.
 
-The seed set is Indian defence / aerospace names (plus L&T, which has a large defence business). ISINs reflect post-split equity where listing pages show a newer code.
+The registry covers the full NSE mainboard equity universe (2,500+ companies). 18 of them — Indian defence / aerospace names plus L&T — are hand-curated and marked `source_verified: true` with sectors, X handles, and aliases filled in. The rest were bulk-imported from the official NSE securities list (`tools/import_nse.py`) with `source_verified: false` and unknown fields as `null`; they are candidates for later verification, not verified data. Re-run the import any time to pick up new listings:
+
+```bash
+python tools/import_nse.py
+```
+
+The import merges by ISIN, never drops existing records, and prefers the `EQ` series when a company appears under several.
 
 ## Python usage
 

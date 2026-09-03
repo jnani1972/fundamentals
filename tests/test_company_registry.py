@@ -57,14 +57,21 @@ SEEDED_SYMBOLS = {
 
 def test_seed_file_has_expected_companies_and_fields():
     companies = load_companies()
-    assert len(companies) == 18
+    # Bulk NSE import: the full mainboard universe plus curated records.
+    assert len(companies) > 2000
     symbols = {company["nse_symbol"] for company in companies}
-    assert symbols == SEEDED_SYMBOLS
+    assert SEEDED_SYMBOLS <= symbols
     for company in companies:
         assert REQUIRED_FIELDS <= set(company)
         assert isinstance(company["aliases"], list)
         assert company["nse_symbol"]
         assert company["company_name"]
+        # INE... is equity; IN9... appears for DVR securities (FELDVR, JISLDVREQS).
+        assert company["isin"].startswith("IN")
+    # The curated defence records keep their verified data.
+    seeded = [c for c in companies if c["nse_symbol"] in SEEDED_SYMBOLS]
+    assert all(c["source_verified"] for c in seeded)
+    assert all(c["defence_aerospace_related"] for c in seeded)
 
 
 def test_get_company_by_symbol_is_case_insensitive():
@@ -92,7 +99,13 @@ def test_search_companies_matches_name_symbol_and_alias():
     by_alias = search_companies("csl")
     assert [company["nse_symbol"] for company in by_partial_name] == ["HAL"]
     assert [company["nse_symbol"] for company in by_symbol] == ["MAZDOCK"]
-    assert [company["nse_symbol"] for company in by_alias] == ["COCHINSHIP"]
+    # "CSL" is an alias of Cochin Shipyard; the wider universe also
+    # legitimately matches CSL Finance and GCSL as substrings.
+    assert [company["nse_symbol"] for company in by_alias] == [
+        "COCHINSHIP",
+        "CSLFINANCE",
+        "GCSL",
+    ]
     assert search_companies("") == []
 
 
