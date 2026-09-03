@@ -152,6 +152,20 @@ def test_browser_get_does_not_hang_on_mcp():
         assert init.json()["result"]["serverInfo"]["name"] == "indian-company-registry"
 
 
+def test_web_ui_serves_search_page():
+    from starlette.testclient import TestClient
+
+    from mcp_server import create_http_app
+
+    app = create_http_app()
+    with TestClient(app) as client:
+        page = client.get("/ui")
+        assert page.status_code == 200
+        assert "text/html" in page.headers["content-type"]
+        assert "search-form" in page.text
+        assert "{ {" not in page.text  # template braces must not leak into HTML
+
+
 def test_listen_port_uses_railway_port_or_local_fallback(monkeypatch):
     from mcp_server import DEFAULT_PORT, LISTEN_HOST, listen_port
 

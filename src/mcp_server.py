@@ -51,6 +51,132 @@ TOOL_NAMES = [
     "get_defence_research_universe",
 ]
 
+_UI_HTML = """<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Indian company registry — search</title>
+  <style>
+    body { font: 16px/1.45 ui-sans-serif, system-ui, sans-serif; margin: 2rem; color: #1a1a1a; max-width: 60rem; }
+    h1 { margin-bottom: 0.25rem; }
+    .muted { color: #666; font-size: 0.9rem; }
+    form { display: flex; gap: 0.5rem; margin: 1rem 0 1.5rem; flex-wrap: wrap; }
+    input[type=search] { flex: 1; min-width: 16rem; padding: 0.55rem 0.7rem; font-size: 1rem; border: 1px solid #bbb; border-radius: 6px; }
+    button { padding: 0.55rem 0.9rem; font-size: 0.95rem; border: 1px solid #2f6fdd; background: #2f6fdd; color: #fff; border-radius: 6px; cursor: pointer; }
+    button.ghost { background: #fff; color: #2f6fdd; }
+    #status { margin: 0.5rem 0; color: #666; }
+    .card { border: 1px solid #ddd; border-radius: 8px; padding: 0.9rem 1.1rem; margin-bottom: 0.9rem; background: #fbfbf9; }
+    .card h2 { margin: 0 0 0.5rem; font-size: 1.1rem; }
+    table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+    td { padding: 0.15rem 0.6rem 0.15rem 0; vertical-align: top; }
+    td.k { color: #666; white-space: nowrap; }
+    a { color: #2f6fdd; }
+    pre { background: #f3f3f0; padding: 0.8rem; border-radius: 6px; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <h1>Indian company registry</h1>
+  <p class="muted">Search the canonical registry. Try a name, symbol, alias, ISIN, or BSE code (e.g. <em>HAL</em>, <em>MDL</em>, <em>ship</em>).</p>
+  <form id="search-form">
+    <input id="q" type="search" placeholder="Search companies…" autofocus>
+    <button type="submit">Search</button>
+    <button type="button" class="ghost" id="universe-btn">Defence universe</button>
+  </form>
+  <div id="status"></div>
+  <div id="results"></div>
+<script>
+const statusEl = document.getElementById('status');
+const resultsEl = document.getElementById('results');
+
+async function callTool(name, args) {
+  const resp = await fetch('/mcp', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', 'Accept': 'application/json, text/event-stream'},
+    body: JSON.stringify({jsonrpc: '2.0', id: 1, method: 'tools/call',
+                          params: {name: name, arguments: args}})
+  });
+  if (!resp.ok) throw new Error('HTTP ' + resp.status);
+  const data = await resp.json();
+  if (data.error) throw new Error(data.error.message || 'MCP error');
+  const sc = data.result && data.result.structuredContent;
+  if (sc && 'result' in sc) return sc.result;
+  if (data.result && data.result.content && data.result.content[0]) {
+    try { return JSON.parse(data.result.content[0].text); } catch (e) { return data.result.content[0].text; }
+  }
+  return null;
+}
+
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function linkify(value) {
+  if (typeof value === 'string' && /^https?:\/\//.test(value))
+    return '<a href="' + esc(value) + '" target="_blank" rel="noopener">' + esc(value) + '</a>';
+  return esc(value);
+}
+
+function renderCard(obj) {
+  if (obj === null || typeof obj !== 'object') return '<div class="card"><pre>' + esc(String(obj)) + '</pre></div>';
+  const title = obj.company_name || obj.nse_symbol || 'Result';
+  let rows = '';
+  for (const [k, v] of Object.entries(obj)) {
+    if (v === null || v === undefined) continue;
+    const shown = Array.isArray(v) ? v.join(', ') : (typeof v === 'object' ? JSON.stringify(v) : v);
+    rows += '<tr><td class="k">' + esc(k) + '</td><td>' + linkify(shown) + '</td></tr>';
+  }
+  return '<div class="card"><h2>' + esc(title) + '</h2><table>' + rows + '</table></div>';
+}
+
+function render(data) {
+  if (data === null || data === undefined) {
+    resultsEl.innerHTML = '<p>No match.</p>';
+  } else if (Array.isArray(data)) {
+    resultsEl.innerHTML = data.length ? data.map(renderCard).join('') : '<p>No match.</p>';
+  } else if (typeof data === 'object' && Array.isArray(data.companies)) {
+    let html = data.companies.map(renderCard).join('');
+    const without = data.companies_without_verified_official_x_account || [];
+    if (without.length) {
+      html += '<div class="card"><h2>No verified official X account</h2><p>' +
+        without.map(r => esc(r.company_name)).join(', ') + '</p></div>';
+    }
+    resultsEl.innerHTML = html;
+  } else if (typeof data === 'object') {
+    resultsEl.innerHTML = renderCard(data);
+  } else {
+    resultsEl.innerHTML = '<div class="card"><pre>' + esc(data) + '</pre></div>';
+  }
+}
+
+async function run(label, promise) {
+  statusEl.textContent = 'Loading ' + label + '…';
+  resultsEl.innerHTML = '';
+  try {
+    render(await promise);
+    statusEl.textContent = '';
+  } catch (err) {
+    statusEl.textContent = '';
+    resultsEl.innerHTML = '<p>Error: ' + esc(err.message) + '</p>';
+  }
+}
+
+document.getElementById('search-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const q = document.getElementById('q').value.trim();
+  if (!q) return;
+  run('“' + q + '”', callTool('search_companies', {query: q}));
+});
+
+document.getElementById('universe-btn').addEventListener('click', () =>
+  run('defence universe', callTool('get_defence_research_universe', {})));
+
+// Load a default result so the page is never empty.
+run('defence universe', callTool('get_defence_research_universe', {}));
+</script>
+</body>
+</html>"""
+
 
 class OfficialXHandleRow(TypedDict):
     company_name: str
@@ -189,6 +315,7 @@ def _status_html(request: Request) -> HTMLResponse:
   <p>This is a read-only MCP server, not a website. Use this URL in an MCP client:</p>
   <p><code>{mcp_url}</code></p>
   <p>Health: <a href="{health_url}">{health_url}</a></p>
+  <p>Search UI: <a href="/ui">/ui</a></p>
   <h2>Tools</h2>
   <ul>{tools}</ul>
 </body>
@@ -216,6 +343,12 @@ async def root(request: Request) -> Response:
     if _wants_html(request):
         return _status_html(request)
     return JSONResponse(_status_payload(request))
+
+
+@mcp.custom_route("/ui", methods=["GET"])
+async def web_ui(_request: Request) -> Response:
+    """Browser search UI over the registry tools."""
+    return HTMLResponse(_UI_HTML)
 
 
 def create_http_app():

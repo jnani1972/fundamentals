@@ -72,6 +72,7 @@ It binds to `0.0.0.0` and listens on `PORT` when that environment variable is se
 | `/health` | Health check. Returns `{"status":"ok"}`. |
 | `/mcp` | Streamable HTTP MCP endpoint. MCP clients POST JSON-RPC here. |
 | `/` | Status page (HTML in a browser, JSON otherwise). |
+| `/ui` | Browser search UI over the registry tools. |
 
 A browser can open `/` or `/mcp` to confirm the server is up. `/mcp` is still the MCP endpoint; Chrome just gets a status page instead of hanging on the event stream.
 
